@@ -19,6 +19,7 @@ app.get('*', function (req, res) {
   const urlRequested = req.originalUrl
   console.log('requesting: ' + urlRequested)
   options.url = URL_BASE + urlRequested
+  console.log(options.url)
   request(options, function (error, response, body) {
     if (error) res.status(500).send('Something went wrong!')
     try {
