@@ -22,6 +22,7 @@ app.get('*', function (req, res) {
   request(options, function (error, response, body) {
     if (error) res.status(500).send('Something went wrong!')
     try {
+      console.log(body)
       const parsedResult = JSON.parse(body)
       res.json(parsedResult)
     } catch (e) {
