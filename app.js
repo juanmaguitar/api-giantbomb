@@ -17,13 +17,17 @@ app.use(cors())
 
 app.get('*', function (req, res) {
   const urlRequested = req.originalUrl
-  options.url = URL_BASE + urlRequested
-  console.log(options.url)
-  request(options, function (error, response, body) {
-    if (error) res.status(500).send('Something went wrong!')
-    else if (body) res.json(JSON.parse(body))
-    else res.status(404).send('No results!')
-  })
+  console.log('requesting: ' + urlRequested)
+  if (!urlRequested.includes('favicon.ico')) {
+    options.url = URL_BASE + urlRequested
+    request(options, function (error, response, body) {
+      if (error) res.status(500).send('Something went wrong!')
+      else if (body) res.json(JSON.parse(body))
+      else res.status(404).send('No results!')
+    })
+  } else {
+    res.status(404).send('No results!')
+  }
 })
 
 app.listen(PORT, () => console.log(`listening on port ${PORT}...`))
